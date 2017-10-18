@@ -4,9 +4,27 @@
 #include<string>
 #include<iostream>
 #include<vector>
+
+class Screen;
+
+class window_mgr
+{
+public:
+	using ScreenIndex = std::vector<Screen>::size_type;
+	void clear(ScreenIndex &i);  //只能声名不能定义，定义应该都
+	window_mgr() = default;
+private:
+	//std::vector<Screen>  screens{ Screen(24,80,' ') };   //这里也不能这样初始化
+	std::vector<Screen>  screens;
+};
+
 class Screen
 {
 public:
+	friend class window_mgr;
+	friend void window_mgr::clear(ScreenIndex &i); 
+	//这个clear要用到Screen这个类，所以要提前声名（在定义的window_mgr中），定义必须放在Screen的定义后面才可。
+	//zai声名某个函数作为友元时，一定要仔细组织程序的结构以便满足声名和定义的彼此依赖关系。
 	using pos = std::string::size_type;         //string::Size_type类型
 	
 	inline Screen &Screen::set(char c);
@@ -64,9 +82,18 @@ inline Screen &Screen::set(pos r, pos col, char ch)
 	return *this;
 }
 
-class window_mgr {
-private:
-	std::vector<Screen> screens{Screen(24, 80, ' ')};
-};
+
+
+void window_mgr::clear(ScreenIndex&i)
+{
+	Screen &s=screens[i];
+	s.contents = string(s.width*s.height, ' ');
+}
+
+//本程序中把window_mgr声名成为screen的友元类，这样的结果就是window_mgr可以访问screen类的成员及成员函数。
+
+
+
+
 
 #endif
