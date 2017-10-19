@@ -1,65 +1,108 @@
-#include<iostream>
+#include"Sala_data.h"
+#include"person.h"
+#include"Sscreen.h"
 
-using namespace std;
+//7.35
 
-
-int gloabl;
-int i = 100;
-int main()
+class Tree 
 {
-	//p34
-	unsigned u =10;
-	int v = -42;
-	cout << v + v << endl;
-	cout << "u+v" << u + v << endl;
-
-	unsigned u1 = 42, u2 = 10;
-	cout << u1 - u2 << endl;
-	cout << u2 - u1 << endl;
-
-
-	//p35
-	unsigned v1 = 10, v2 = 42;
-	cout << v1 - v2 << endl;
-	cout << v2 - v1 << endl;
-
-	int i = 10, i2 = 42;
-	cout << i - i2 << endl;
-	cout << i2 - i << endl;
-	cout << i - v1 << endl;
-	cout << v1 - i << endl;
-
-	//p36
-	cout << "hello world"
-		<< "bye world" << endl;
-	//while(1)
-	//cout << "\a" << endl;
-
-	//p39  四种初始化  c++11之后，大括号这种初始化方式得到了全面应用
- 	int x = 0;
-	int x1 = { 0 };
-	int x2(0);
-	int x3{ 0 };
+public:
+	Tree(string s, double d) :color(s), height(d) { cout << "默认构造函数调用" << endl; }
+	Tree(double d) :Tree("", d) { cout << "委托构造函数调用" << endl; };    //这是一个委托构造函数，不能忘记了大括号
+private:
+	string color;
+	double height;
+	
+};
 
 
-	double a = 3.245;
-	//int a1={ a };
-	//int a2{ a };    //这两种情况都会报错，会丢失数据，而通过花括号的方式是没有转换类型的。
-	int a3 = a;
-	int a4(a);   //这两种方式都可以，因为执行了类型转换
-	cout << x << " " << x1 << " " << x2 << " " << x3 << endl;
+class Example {
+public:
+	static double rate ;      
+	static const int vecsize = 20; 
+    static  vector<double> vec;
 
-	//p40  
-	int gloab2=1;
-	cout << gloabl << endl;        //gloab1是定义在函数外部的，默认初始化为0
-	cout << gloab2 << endl;        //这里VS会报错，不允许函数内未被初始化或者赋值的变量被使用。
+};
 
-	//int i= 1;              //VS2015不支持重定义，会报错。
-	int j = i;
-	cout << i << endl;
-	cout << j << endl;
+int main()
 
+{
+//	vector<person> pp;
+//	
+//	person p1("zhxing","china");
+//	person p2("ans", "japan");
+//	person p3("ansh2", "canada");
+//	person p4(cin);       //用输入的方式来初始化。
+//	pp.push_back(p4);
+//	pp.push_back(p1);
+//	pp.push_back(p2);
+//	pp.push_back(p3);
+//	for(auto p:pp)
+//	p.show_ifo();
+//	
+//	vector<person> px;
+//	cout << "输入5位信息，名字加地址!" << endl;
+//	for (decltype(px.size()) i = 0; i < 5; i++)
+//	{
+//		px.push_back(person(cin));       //这里就是一个初始化一个临时person临时变量，所以可以用类名+构造函数初始化一个临时对象。
+//	}
+//	for (auto p : px)
+//		p.show_ifo();
+//
+//	Sale_data s1("ISBN", 15, 0);
+//	s1.showIfo();
+//
+//	
+//	Sale_data s2(cin);
+//	if (cin)
+//	{
+//		Sale_data trans(cin);
+//		do {
+//			if (s2.isbn() == trans.isbn())
+//				s2.combine(trans);
+//			else
+//			{
+//				print(cout, s2) << endl;
+//				s2 = trans;
+//			}
+//		} while (read(cin, trans));
+//		print(cout, s2) << endl;
+//	}
+//	else
+//	{
+//		cout<< "no data!" << endl;
+//	}
 
+	/*Screen myscreen(5, 5, 'x');
+	myscreen.move(4, 4).set('#').display(cout);
+	cout << "\n";
+	myscreen.display(cout);
+	cout << "\n";
+
+	person p("zhxing", "china");
+	p.show_ifo();*/
+
+	Tree t1("RED", 2.5);
+	Tree t2(2.5);  //这个虽然是委托构造函数，但是在调用的时候会先调用默认构造函数。从测试结果也可以看出这点
+
+	double d = 2.5;
+	Tree d2 = d;   //这样可以利用类的类型转换规则（隐性的）
+
+	Sale_data i("zhangxing",5,6);
+	string s = "zhxing";   //这样就是一般的初始化
+							//string &s="xx";           //这样初始化就是不对的，字面值只能初始化成常量的引用
+														//应该是:  const string &s="xx";
+
+	i.combine(s);    //这里会调用只有一个参数的构造函数隐式把string对象转换为sale_data对象，(临时的，s并不改变)，
+					 //且字面值会初始化成一个const类型
+	i.showIfo();    
+
+	//7/58
+	Example::rate;
+	Example::vec;
+	
+	
 	return 0;
-
 }
+
+
