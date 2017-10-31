@@ -2,6 +2,8 @@
 #include<vector>
 #include<string>
 #include<cctype>
+#include<stack>
+using std::stack;
 using std::vector;
 using std::string;
 using std::cout;
@@ -208,5 +210,35 @@ int main()
 	
 
 	date d("February/23/1992");
+
+	//9.52
+	string express{ "this is (prey)" };
+	bool bSeen = false;
+	stack<char> stk;
+	for (const auto &s : express)
+	{
+		if (s == '(')
+		{
+			bSeen = true; 
+			continue;
+		}
+		if (s == ')')
+		{
+			bSeen = false;
+		}
+		if (bSeen)
+			stk.push(s);   //如果是左括号然后压入栈中
+	}
+	string restring;   //代替的字符串
+	while (!stk.empty())
+	{
+		restring += stk.top();
+		stk.pop();  
+		//加上，并删除
+	}
+
+	express.replace(express.find('(') + 1, restring.size(),restring);
+	cout << express << endl;
+
 	return 0;
 }
