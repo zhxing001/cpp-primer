@@ -14,7 +14,7 @@ void write_jiou(const string &s_num, const string &s_odd, const string &s_even);
 
 int main()
 {
-	//istream_iterator<int> in(cin), eof;  //空的迭代器可以当尾后用？
+	//istream_iterator<int> in(cin), eof;  //空的迭代器可以当尾后用
 	//cout << accumulate(in, eof, 0) << endl;
 
 	vector<string> vec1;

@@ -138,7 +138,7 @@ int main()
 		cout << l << " ";
 	cout << endl;
 	unique_copy(l358.begin(), l358.end(), back_inserter(l22));
-	//这个copy只是不重复
+	//这个copy只是不重复的
 	for(auto l:l22)
 		cout << l << " ";
 	cout << endl;
