@@ -13,7 +13,7 @@ private:
 	int i;
 };
 
-int mian()
+int main()
 {
 	cout << "gun!" << endl;
 	return 0;
