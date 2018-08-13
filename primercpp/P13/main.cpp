@@ -1,3 +1,4 @@
+#pragma warning(disable:4996)
 #include<iostream>
 #include<string>
 #include<vector>
@@ -89,31 +90,71 @@ NoName1::~NoName1()
 	delete pstring;
 }
 
+class Cdemo {
+
+public:
+	Cdemo(int pa, char *str)
+	{
+		this->a = pa;
+		this->str = new char[100];   //动态分配空间
+		strcpy(this->str, str);      //然后把字符串拷贝过来
+	}
+	Cdemo(const Cdemo & cd)
+	{
+		this->a = cd.a;
+		this->str = new char[100];
+		if (str != 0)
+			strcpy(this->str, cd.str);
+	}
+	~Cdemo()
+	{
+		delete str;
+	}
+	//private:  应该是私有的，为了测试方便，设计为共有的
+	//不写拷贝构造函数的话，就会生成一个拷贝构造函数
+public:
+	int a;
+	char *str;
+};
+
+
 int main()
 {
-	sales_item a("1234");   //构造函数
-	sales_item b = a;       //拷贝构造
-	sales_item c(a);        //拷贝构造
-	sales_item e;
-	e = a;                  //赋值操作符
-	sales_item *p = new sales_item(a);   //拷贝构造函数被调用
-	
-	cout << "函数调用" << endl;
-	func(a);          //拷贝构造函数被调用
+	//sales_item a("1234");   //构造函数
+	//sales_item b = a;       //拷贝构造
+	//sales_item c(a);        //拷贝构造
+	//sales_item e;
+	//e = a;                  //赋值操作符
+	//sales_item *p = new sales_item(a);   //拷贝构造函数被调用
+	//
+	//cout << "函数调用" << endl;
+	//func(a);          //拷贝构造函数被调用
 
-	cout << "vector容器：" << endl;
-	vector<sales_item> v_sales(5, a);   //这样使用容器的时候也会发生拷贝构造
+	//cout << "vector容器：" << endl;
+	//vector<sales_item> v_sales(5, a);   //这样使用容器的时候也会发生拷贝构造
 
-	cout << "数组" << endl;            //这里会调用构造函数而不会调用拷贝构造
-	sales_item primes_eds[] = { string("dasjkhjfka"),
-							string("dajgakdfasf"),
-							string("dasdasfdfsd") };
+	//cout << "数组" << endl;            //这里会调用构造函数而不会调用拷贝构造
+	//sales_item primes_eds[] = { string("dasjkhjfka"),
+	//						string("dajgakdfasf"),
+	//						string("dasdasfdfsd") };
 
 
-	NoName1 x;  
-	NoName1 *y=new NoName1;
-	cout << "hello!" << endl;
-	delete y;   //调用delete的时候就会释放资源
+	//NoName1 x;  
+	//NoName1 *y=new NoName1;
+	//cout << "hello!" << endl;
+	//delete y;   //调用delete的时候就会释放资源
+
+
+	Cdemo A(10, "hello");
+	Cdemo B(A);     //使用默认的构造函数
+	cout << A.a << "," << A.str << endl;
+	cout << B.a << "," << B.str << endl;
+
+	cout << "修改后：" << endl;
+	B.a = 8;
+	B.str[0] = 'k';
+	cout << A.a << "," << A.str << endl;
+	cout << B.a << "," << B.str << endl;
 	return 0;
 }
 
