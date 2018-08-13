@@ -145,16 +145,16 @@ int main()
 	//delete y;   //调用delete的时候就会释放资源
 
 
-	Cdemo A(10, "hello");
-	Cdemo B(A);     //使用默认的构造函数
-	cout << A.a << "," << A.str << endl;
-	cout << B.a << "," << B.str << endl;
+	//Cdemo A(10, "hello");
+	//Cdemo B(A);     //使用默认的构造函数
+	//cout << A.a << "," << A.str << endl;
+	//cout << B.a << "," << B.str << endl;
 
-	cout << "修改后：" << endl;
-	B.a = 8;
-	B.str[0] = 'k';
-	cout << A.a << "," << A.str << endl;
-	cout << B.a << "," << B.str << endl;
+	//cout << "修改后：" << endl;
+	//B.a = 8;
+	//B.str[0] = 'k';
+	//cout << A.a << "," << A.str << endl;
+	//cout << B.a << "," << B.str << endl;
 	return 0;
 }
 
