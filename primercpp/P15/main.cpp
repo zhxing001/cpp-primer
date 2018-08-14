@@ -108,7 +108,9 @@
 
 int main()
 {
-	std::cout << "开始测试！！" << std::endl;
+
+
+	//std::cout << "开始测试！！" << std::endl;
 
 	//Dog A;
 	//A.Speak();   //这个speak就是继承过来的，Dog本身没有定义这个成员
@@ -119,40 +121,54 @@ int main()
 	//小子 a;
 	//a.X = 1;
 	//a.Y = 2;
-	Mammal *theArray[5];
-	theArray[0] = new Dog;
-	theArray[1] = new Cat;
-	theArray[2] = new Pig;
-	theArray[3] = new Horse;
-	theArray[4] = new Mammal;
+	//Mammal *theArray[5];
+	//theArray[0] = new Dog;
+	//theArray[1] = new Cat;
+	//theArray[2] = new Pig;
+	//theArray[3] = new Horse;
+	//theArray[4] = new Mammal;
 
-	Mammal *otherArray[5];
-	for (int i = 0; i < 5; i++)
-	{
-		otherArray[i]=theArray[i]->clone();
-	}
+	//Mammal *otherArray[5];
 
-	for (int i = 0; i < 5; i++)
-	{
-		theArray[i]->Speak();
-	}
+	//for (int i = 0; i < 5; i++)
+	//{
+	//	otherArray[i]=theArray[i]->clone();
+	//}
 
-	for (int i = 0; i < 5; i++)
-	{
-		cout << "clone之后的:";
-		otherArray[i]->Speak();
-	}
-	
-	ValueFunc(*theArray[1]);
+	//for (int i = 0; i < 5; i++)
+	//{
+	//	theArray[i]->Speak();
+	//}
+
+	//for (int i = 0; i < 5; i++)
+	//{
+	//	cout << "clone之后的:";
+	//	otherArray[i]->Speak();
+	//}
+	//
+	//ValueFunc(*theArray[1]);
 
 
-	base ba;
-	fun(ba);
-	Derivedl zi;
-	fun(zi);           //这个函数接受的是基类，传入派生类也可以，但是在print的时候却是基类的print
+	//base ba;
+	//fun(ba);
+	//Derivedl zi;
+	//fun(zi);           //这个函数接受的是基类，传入派生类也可以，但是在print的时候却是基类的print
 
-	ba = zi;           //这两个是可以相等的。可以用派生类赋值基类
-	
-	base &ref = zi;    //可以用基类的引用来引用派生类
+	//ba = zi;           //这两个是可以相等的。可以用派生类赋值基类
+	//
+	//base &ref = zi;    //可以用基类的引用来引用派生类
+
+
+	//测试多继承
+	//cout << "\n\n\n多继承测试" << endl;
+	//flyHorse *peg = new flyHorse(red,5, true,10,20);   //构造函数
+	//peg->Fly();    //从鸟那里继承来的
+	//peg->chirp();   //自己的
+	//peg->Whinny();   //从马那里继承的
+	//cout << "有" << peg->gerNumberBelievers() << " 人相信世界上有飞马" << endl;
+	//cout << peg->bird::getcolor() << endl;
+
+	//peg->getAge();
+	//delete peg;
 	return 0;
 }
