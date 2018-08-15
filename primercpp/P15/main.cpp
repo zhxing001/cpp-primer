@@ -2,6 +2,7 @@
 #include<string>
 #include"Virtual.h"
 
+
 //狗的品种
 //enum BREED
 //{
@@ -109,7 +110,44 @@
 int main()
 {
 
+	shape *s;
+	s = new Square(5);
+	Square ss(5);
+	ss.test();
 
+	dog dd(4, red);
+
+
+	//int choice;
+	//bool fQuit = false;
+	//shape *sp=nullptr;     //新标准不允许这里不做初始化直接用！
+	//while (fQuit == false)
+	//{
+	//	cout << "(1)circle  (2)rectangle  (3)square  (0)quit" << endl;
+	//	cout << "请输入选项;" << endl;
+	//	cin >> choice;
+	//	switch (choice)
+	//	{
+	//	case 1:
+	//		sp = new Circle(5);
+	//		break;
+	//	case 2:
+	//		sp = new Rectangle(4, 6);
+	//		break;
+	//	case 3:
+	//		sp = new Square(5);
+	//		break;
+	//	case 0:
+	//		fQuit = true;
+	//	default:
+	//		break;
+	//	}
+	//	if (fQuit == false)
+	//	{
+	//		sp->draw();       //多态
+	//		delete sp;       //指针是通过new创建的对象的话，一定要用delete把对象删除
+	//	}
+	//}
 	//std::cout << "开始测试！！" << std::endl;
 
 	//Dog A;

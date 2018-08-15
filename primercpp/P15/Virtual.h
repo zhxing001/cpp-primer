@@ -2,7 +2,7 @@
 #include<iostream>
 using std::cout;
 using std::endl;
-
+using std::cin;
 
 enum BREED
 {
@@ -182,20 +182,171 @@ flyHorse::flyHorse(color Col, int height, bool migra,long numberBelieve,int age)
 
 
 //纯虚函数，抽象类测试
-
 class shape {
+public:
+	shape(){}
+	virtual ~shape() {}
+	virtual double getArea() = 0;
+	virtual double getPerim() = 0;     
+	virtual void draw() = 0;     //写上等于0就是纯虚函数,这些函数的实现
 
 };
+//一般而言，纯虚函数的定义，可以不写，一般情况下也不写
+
+//void shape::draw()
+//{
+//	cout << "-----" << endl;
+//}
 
 class Circle :public shape
 {
+public:
+	Circle(double radius):itsRadius(radius) { cout << "circle的构造函数被调用" << endl; }
+	virtual ~Circle() {}
+	virtual double getArea() { return 3.14*itsRadius*itsRadius; }
+	virtual double getPerim() { return 2 * 3.14*itsRadius; }
+	virtual void draw() { cout << "it is a circle!" << endl; }
+private:
+	double itsRadius; 
+};
 
+class Rectangle :public shape 
+{
+public:
+	Rectangle(double h, double w) :height(h), width(w) { cout << "Rectangle的构造函数被调用！" << endl; }
+	virtual ~Rectangle() {};
+	virtual double getArea() { return height*width; }
+	virtual double getPerim() { return 2 * (height + width); }
+	virtual void draw()
+	{ 
+		cout << "it is a rectangle!" << endl; 
+	}
+	virtual double getWidht() { return width; }
+	virtual double gerHeight() { return height; }
+
+private:
+	double height;
+	double width;
+};
+
+class Square :public Rectangle
+{
+public:
+	Square(double x) :Rectangle(x, x) { cout << "Square 的构造函数被调用" << endl; }   //调用其基类的构造函数
+	virtual ~Square() {};
 	
+	virtual void draw() { cout << "its a square!" << endl; }
+	void test() { cout << "基类的指针可以访问派生类的非继承成员么？" << endl; }
 };
 
-class Rectangle :public shape {
+
+
+
+class Animal1
+{
+public:
+	Animal1(int age);
+	virtual ~Animal1() {}
+	virtual int getAge() const { return itsage; }
+	virtual void setAge(int age) { this->itsage = age; }
+	virtual void sleep() const = 0;
+	virtual void eat() const = 0;
+	virtual void Rproduce() const = 0;
+	virtual void Move() const = 0;
+	virtual void Speak() const = 0;           //五个纯虚函数
+
+private:
+	int itsage;
+};
+
+Animal1::Animal1(int age) :itsage(age) { cout << "animal的构造函数被调用！" << endl; }
+
+
+class mammal1 :public Animal1
+{
+public:
+	mammal1(int age) :Animal1(age)
+	{
+		cout << "MAMMAL的构造函数被调用！" << endl;
+	}
+	virtual ~mammal1() { cout << "mammal的析构函数被调用！" << endl; }
+	virtual void Rproduce() const {
+		cout << "mammal reproduction depicted...\n";     //只重写了一个纯虚函数，其他的纯虚函数被继承了，所以也是抽象类
+	}
+};
+
+
+class fish:public Animal1
+{
+public:
+	fish(int age) :Animal1(age)
+	{
+		cout << "fish的构造函数被调用" << endl;
+	}
+	virtual ~fish()
+	{
+		cout << "fish的析构函数被调用" << endl;
+	}
+
+
+
+	virtual void sleep() const { cout << "fish is sleeping" << endl; }
+	virtual void eat() const { cout << "fish is eating" << endl; }
+	virtual void Rproduce() const { cout << "fish is rproducing!!" << endl; }
+	virtual void Move() const { cout << "fish is moving" << endl; }
+	virtual void Speak() const { cout << "fish cant speak!!" << endl; }       //五个纯虚函数都做了重写覆盖
 
 };
+
+
+
+class Horse1 :public mammal1
+{
+public:
+	Horse1(int age, color col) :mammal1(age), itsColor(col) {
+		cout << "Horse的构造函数被调用" << endl;
+	}
+	virtual ~Horse1()
+	{
+		cout << "Horse的析构函数被调用" << endl;
+	}
+
+
+	virtual void sleep() const { cout << "Horse is sleeping" << endl; }
+	virtual void eat() const { cout << "Horse is eating" << endl; }
+	//virtual void Rproduce() const { cout << "fish is rproducing!!" << endl; }   //这个在mammal里已经做了覆盖不是纯虚了
+	virtual void Move() const { cout << "Horse is moving" << endl; }
+	virtual void Speak() const { cout << "Horse is speaking!!" << endl; }       //五个纯虚函数都做了重写覆盖
+	virtual color GetItsColor() const { return itsColor; }
+protected:
+	color itsColor;
+
+};
+
+
+class dog :public mammal1
+{
+public:
+	dog(int age, color col) :mammal1(age), itsColor(col) {
+		cout << "dog的构造函数被调用" << endl;
+	}
+	virtual ~dog()
+	{
+		cout << "dog的析构函数被调用" << endl;
+	}
+
+
+	virtual void sleep() const { cout << "dog is sleeping" << endl; }
+	virtual void eat() const { cout << "dog is eating" << endl; }
+	virtual void Rproduce() const { cout << "dog is rproducing!!" << endl; }    
+	virtual void Move() const { cout << "dog is runing fastly!!" << endl; }
+	virtual void Speak() const { cout << "dog is speaking!!" << endl; }       //五个纯虚函数都做了重写覆盖
+	virtual color GetItsColor() const { return itsColor; }
+protected:
+	color itsColor;
+};
+
+
 
 
 
