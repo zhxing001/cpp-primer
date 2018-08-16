@@ -241,7 +241,7 @@ public:
 
 
 
-
+//纯虚函数的实现测试
 class Animal1
 {
 public:
