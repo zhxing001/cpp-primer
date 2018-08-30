@@ -6,6 +6,7 @@
 #include <iostream>
 #include <cstdio>
 #include <vector>
+#include<algorithm>
 using namespace std;
 
 //int min(int x, int y)
@@ -109,6 +110,7 @@ int feibo1(int n)
 
 int numOfTriangle(vector<int> &numbers)
 {
+	sort(numbers.begin(), numbers.end());
 	int cnt = 0;
 	int sz = numbers.size();
 	for (int i = sz; i > 1; i--)
@@ -127,7 +129,6 @@ int numOfTriangle(vector<int> &numbers)
 		}
 	}
 	return cnt;
-
 }
 
 int main()
